@@ -6,6 +6,64 @@
 - Run deterministic match analysis and skill-gap scoring
 - View ops dashboard metrics
 
+## Demo (Text + Screenshots)
+
+
+### 1) Upload Documents
+
+User uploads resume/JD files (`PDF/TXT/DOCX`), chooses document type, and selects indexing mode:
+
+- `Auto`: indexes immediately after upload
+- `Manual`: upload first, then click manual index
+
+The app validates file type/size and stores chunks in MongoDB for downstream retrieval and analysis.
+
+![Upload Documents](docs/images/demo-upload.png)
+
+### 2) Ask Questions (RAG Chat + Citations)
+
+User creates a chat session, asks career-fit questions, and optionally filters retrieval by selecting one or multiple indexed files.
+
+The assistant returns grounded answers with traceable citations:
+
+- source file name
+- chunk index
+- chunk id
+- similarity score
+
+If evidence is weak, the app responds with an explicit insufficient-evidence message.
+
+![RAG Chat with Citations](docs/images/demo-chat.png)
+
+### 3) Get Match Score and Skill Gaps
+
+User selects one resume file and one JD file, then runs deterministic analysis.
+
+The app outputs:
+
+- overall match score (0-100)
+- category breakdown (skill, experience, depth, domain)
+- matched/missing/weak skills
+- evidence-backed recommendations
+
+This score is formula-based and reproducible (not arbitrary LLM scoring).
+
+![Match Analysis](docs/images/demo-match.png)
+
+### 4) Dashboard (Advanced Tools)
+
+In Advanced Tools, dashboard shows operational and analysis metrics:
+
+- total files/chats/analyses
+- indexing health
+- match trend by day
+- top missing skills
+- recent activity
+
+This helps reviewers see product behavior across the full workflow.
+
+![Operations Dashboard](docs/images/demo-dashboard.png)
+
 ## Tech Stack
 
 - Frontend: React + Vite + TypeScript
@@ -163,85 +221,7 @@ Outputs:
 - Top missing skills
 - Recent activity
 
-## Demo (Text + Screenshots)
 
-This section is designed for quick review by recruiters/interviewers without running the project first.
-
-### Screenshot Folder Convention
-
-Put screenshots in `docs/images/` and keep these filenames:
-
-- `docs/images/demo-upload.png`
-- `docs/images/demo-chat.png`
-- `docs/images/demo-match.png`
-- `docs/images/demo-dashboard.png`
-
-### 1) Upload Documents
-
-User uploads resume/JD files (`PDF/TXT/DOCX`), chooses document type, and selects indexing mode:
-
-- `Auto`: indexes immediately after upload
-- `Manual`: upload first, then click manual index
-
-The app validates file type/size and stores chunks in MongoDB for downstream retrieval and analysis.
-
-![Upload Documents](docs/images/demo-upload.png)
-
-### 2) Ask Questions (RAG Chat + Citations)
-
-User creates a chat session, asks career-fit questions, and optionally filters retrieval by selecting one or multiple indexed files.
-
-The assistant returns grounded answers with traceable citations:
-
-- source file name
-- chunk index
-- chunk id
-- similarity score
-
-If evidence is weak, the app responds with an explicit insufficient-evidence message.
-
-![RAG Chat with Citations](docs/images/demo-chat.png)
-
-### 3) Get Match Score and Skill Gaps
-
-User selects one resume file and one JD file, then runs deterministic analysis.
-
-The app outputs:
-
-- overall match score (0-100)
-- category breakdown (skill, experience, depth, domain)
-- matched/missing/weak skills
-- evidence-backed recommendations
-
-This score is formula-based and reproducible (not arbitrary LLM scoring).
-
-![Match Analysis](docs/images/demo-match.png)
-
-### 4) Dashboard (Advanced Tools)
-
-In Advanced Tools, dashboard shows operational and analysis metrics:
-
-- total files/chats/analyses
-- indexing health
-- match trend by day
-- top missing skills
-- recent activity
-
-This helps reviewers see product behavior across the full workflow.
-
-![Operations Dashboard](docs/images/demo-dashboard.png)
-
-### End-to-End Demo Summary
-
-Core flow:
-
-1. Upload resume + JD
-2. Index vectors (auto or manual)
-3. Ask chat question with citations
-4. Run match analysis
-5. Confirm dashboard updates
-
-Expected reviewer takeaway: this is a complete RAG application, not just a single endpoint demo.
 
 ## API Quick Reference
 
