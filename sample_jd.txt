@@ -1,0 +1,12 @@
+Backend Engineering Intern (Node.js)
+
+Responsibilities
+- Build and maintain backend APIs for career assistant features.
+- Implement robust data models and optimize query performance.
+- Collaborate with frontend engineers and deliver production-ready features.
+
+Requirements
+- Must have: Node.js, TypeScript, MongoDB, REST API design.
+- Familiar with Docker and basic CI/CD workflows.
+- Experience with retrieval systems or LLM applications is a plus.
+- 1+ years internship/project experience in backend development.

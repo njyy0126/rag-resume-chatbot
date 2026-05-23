@@ -1,0 +1,42 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "RAG Career Assistant backend service",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "tsc -p tsconfig.json && node dist/server.js",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/server.js",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test src/**/*.test.ts"
+  },
+  "keywords": [
+    "express",
+    "rag",
+    "career-assistant"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@qdrant/js-client-rest": "^1.18.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "mammoth": "^1.11.0",
+    "mongodb-memory-server": "^10.3.0",
+    "mongoose": "^8.20.1",
+    "multer": "^2.0.2",
+    "pdf-parse": "^1.1.1",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.5",
+    "@types/multer": "^2.0.0",
+    "@types/node": "^24.10.1",
+    "@types/pdf-parse": "^1.1.5",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  }
+}

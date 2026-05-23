@@ -1,0 +1,20 @@
+Alex Chen
+Email: alex.chen@example.com
+Phone: +86 13800000000
+
+Profile
+Backend-focused software engineering intern candidate with hands-on experience in Node.js, Express, React, and MongoDB. Built course projects using REST APIs and simple RAG prototypes.
+
+Skills
+- JavaScript / TypeScript
+- Node.js / Express
+- React
+- MongoDB
+- SQL basics
+- Docker basics
+
+Experience
+Campus Project: Job Match Assistant
+- Implemented file upload and text chunking for resume and job description analysis.
+- Built API validation and error handling.
+- Added a dashboard to show match score and missing skills.
