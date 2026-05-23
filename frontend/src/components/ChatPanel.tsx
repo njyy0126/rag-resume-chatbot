@@ -71,7 +71,12 @@ export default function ChatPanel() {
       throw new Error(payload.message || "Failed to load chat sessions.");
     }
     setSessions(payload.data);
-    if (!selectedSessionId && payload.data.length > 0) {
+    if (payload.data.length === 0) {
+      setSelectedSessionId("");
+      setMessages([]);
+      return;
+    }
+    if (!selectedSessionId || !payload.data.some((session) => session.sessionId === selectedSessionId)) {
       setSelectedSessionId(payload.data[0].sessionId);
     }
   };
@@ -122,6 +127,34 @@ export default function ChatPanel() {
       setMessages([]);
     } catch (error) {
       setMessageError(toFriendlyError(error, "Could not create session."));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const deleteSession = async (sessionId: string) => {
+    const shouldDelete = window.confirm("Delete this chat session and all its messages?");
+    if (!shouldDelete) {
+      return;
+    }
+
+    setMessageError("");
+    try {
+      setLoading(true);
+      const response = await fetch(`/api/chat/sessions/${sessionId}`, {
+        method: "DELETE",
+      });
+      const payload = (await response.json()) as { message?: string };
+      if (!response.ok) {
+        throw new Error(payload.message || "Failed to delete chat session.");
+      }
+
+      if (selectedSessionId === sessionId) {
+        setMessages([]);
+      }
+      await fetchSessions();
+    } catch (error) {
+      setMessageError(toFriendlyError(error, "Could not delete chat session."));
     } finally {
       setLoading(false);
     }
@@ -255,13 +288,24 @@ export default function ChatPanel() {
             <ul>
               {sessions.map((session) => (
                 <li key={session.sessionId}>
-                  <button
-                    type="button"
-                    className={selectedSessionId === session.sessionId ? "active" : ""}
-                    onClick={() => setSelectedSessionId(session.sessionId)}
-                  >
-                    {session.title}
-                  </button>
+                  <div className="session-item">
+                    <button
+                      type="button"
+                      className={selectedSessionId === session.sessionId ? "active" : ""}
+                      onClick={() => setSelectedSessionId(session.sessionId)}
+                    >
+                      {session.title}
+                    </button>
+                    <button
+                      type="button"
+                      className="session-delete-button"
+                      onClick={() => void deleteSession(session.sessionId)}
+                      disabled={loading}
+                      title="Delete session"
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </li>
               ))}
             </ul>

@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import {
   createChatSession,
+  deleteChatSession,
   getSessionMessages,
   listChatSessions,
 } from "../services/chat/chatSessionService";
@@ -73,6 +74,25 @@ export const sendMessageController = async (req: Request, res: Response, next: N
 
     res.status(200).json({
       message: "RAG chat response generated.",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const deleteChatSessionController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const sessionId = Array.isArray(req.params.sessionId)
+      ? req.params.sessionId[0]
+      : req.params.sessionId;
+    const result = await deleteChatSession({ sessionId: sessionId ?? "" });
+    res.status(200).json({
+      message: "Chat session deleted.",
       data: result,
     });
   } catch (error) {

@@ -259,6 +259,27 @@ h1 {
   cursor: pointer;
 }
 
+.session-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.chat-sessions .session-item .session-delete-button {
+  width: auto;
+  border: none;
+  border-radius: 8px;
+  padding: 0.4rem 0.55rem;
+  color: #fff;
+  background: #c73a3a;
+}
+
+.chat-sessions .session-item .session-delete-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
 .chat-sessions li button.active {
   border-color: #2d6cdf;
   background: #eff5ff;

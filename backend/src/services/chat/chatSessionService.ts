@@ -93,3 +93,20 @@ export const updateSessionTitleIfDefault = async (
     await session.save();
   }
 };
+
+export const deleteChatSession = async (input: { sessionId: string }) => {
+  const parsed = sessionIdSchema.parse(input);
+  const sessionObjectId = toObjectId(parsed.sessionId);
+  const session = await ChatSessionModel.findById(sessionObjectId);
+  if (!session) {
+    throw new AppError("Chat session not found.", 404);
+  }
+
+  const deletedMessages = await ChatMessageModel.deleteMany({ sessionId: sessionObjectId });
+  await ChatSessionModel.deleteOne({ _id: sessionObjectId });
+
+  return {
+    sessionId: parsed.sessionId,
+    deletedMessageCount: deletedMessages.deletedCount ?? 0,
+  };
+};
